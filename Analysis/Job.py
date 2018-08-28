@@ -39,7 +39,7 @@ class Job(object):
                     
     def createAnalysis(self, analysisName):
         analysisName = self.Configuration["Analysis"]
-        importedAnalysisModule = importlib.import_module("Analysis." + analysisName)
+        importedAnalysisModule = importlib.import_module("." + analysisName, __package__)
         analysis = getattr(importedAnalysisModule, analysisName)(self.Name)
         analysis.Store.initializeTuple(self.InputTree)
         analysis.setIsData("data" in self.Name.lower())
